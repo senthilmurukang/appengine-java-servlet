@@ -1,0 +1,65 @@
+import com.github.sherter.googlejavaformatgradleplugin.GoogleJavaFormat
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.google.cloud.tools:appengine-gradle-plugin:2.4.1'
+    }
+}
+plugins {
+    id 'org.sonarqube' version '2.7'
+    id 'java'
+    id 'war'
+    id "application"
+    id 'com.github.sherter.google-java-format' version '0.9'
+}
+
+apply plugin: 'com.google.cloud.tools.appengine'
+
+group = 'org.sen'
+version = '1.0.0'
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+repositories {
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots'
+    }
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+    implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
+    implementation group: 'org.eclipse.jetty', name: 'jetty-webapp', version: '9.4.30.v20200611'
+    implementation group: 'org.eclipse.jetty', name: 'jetty-servlets', version: '9.4.30.v20200611'
+    implementation group: 'org.eclipse.jetty', name: 'jetty-util', version: '9.4.30.v20200611'
+    implementation group: 'org.eclipse.jetty', name: 'jetty-annotations', version: '9.4.30.v20200611'
+}
+
+mainClassName = 'org.sen.webapp.Main'
+
+task format(type: GoogleJavaFormat) {
+    source 'src/main'
+    source 'src/test'
+    include '**/*.java'
+    exclude '**/*Template.java'
+}
+
+compileJava.dependsOn format
+
+test {
+    useTestNG()
+    debugOptions {
+        enabled = true
+        port = 4455
+        server = true
+        suspend = false
+    }
+    testLogging.showStandardStreams = true
+}

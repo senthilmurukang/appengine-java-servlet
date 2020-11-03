@@ -1,2 +1,17 @@
 # Google App Engine generated folder
 appengine-generated/
+
+# Ignore Java classpath
+.classpath
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+# Ignore Gradle bin directory
+bin
+
+# Ignore user setting
+.settings

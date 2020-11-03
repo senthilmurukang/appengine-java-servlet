@@ -1,0 +1,2 @@
+runtime: java11
+entrypoint: 'java -cp "*" org.sen.webapp.Main appengine-java-servlet-6.0.0.war'
