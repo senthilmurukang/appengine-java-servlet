@@ -8,3 +8,6 @@
  */
 
 rootProject.name = 'appengine-java-servlet'
+include 'JettyLauncher'
+include 'WebApp'
+

@@ -1,0 +1,12 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'war'
+
+dependencies {
+    compileOnly libs.servletApi
+}

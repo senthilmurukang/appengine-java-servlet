@@ -1,0 +1,2 @@
+runtime: java11
+entrypoint: 'java -cp "dependencies/*:classes/java/main" org.sen.webapp.launcher.Main WebApp-1.0.0.war'
